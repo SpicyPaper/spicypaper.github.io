@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+
+    <script type="text/javascript" src="utils.js"></script>
+    <script type="text/javascript" src="mainScript.js"></script>
+    <script type="text/javascript" src="simulation.js"></script>
+    <script type="text/javascript" src="Map/map.js"></script>
+    <script type="text/javascript" src="Map/pixel.js"></script>
+    <script type="text/javascript" src="Ant/ant.js"></script>
+    <script type="text/javascript" src="Ant/classicAnt.js"></script>
+    <script type="text/javascript" src="Ant/warriorAnt.js"></script>
+    <script type="text/javascript" src="Ant/randomAnt.js"></script>
+    <script type="text/javascript" src="Ant/customAnt.js"></script>
+
+    <title>Fourmis de Langton</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div>
+        <input id="openOptions" onclick="changeOpenCloseOptions()" type="button" name="" value="+">
+      </div>
+
+      <div id="options">
+
+        <div>
+          <input id="closeOptions" onclick="changeOpenCloseOptions()" type="button" name="" value="x">
+        </div>
+
+        <div class="oneOption">
+          <h3>Simulation</h3>
+
+          <button class="button buttonManager" onclick="startAnts()">Start</button>
+          <button class="button buttonManager" onclick="pauseAnts()">Pause</button>
+          <button class="button buttonManager" onclick="restartAnts()">Restart</button>
+          <button class="button buttonManager" onclick="stopAnts()">Stop</button>
+          <button class="button buttonManager" onclick="resetAnts()">Reset</button>
+
+          <br><br>
+
+          <table>
+            <tr>
+              <th>FPS</th>
+              <th>Ant Number</th>
+              <th>Step</th>
+              <th>State</th>
+            </tr>
+            <tr>
+              <td><output id="fps"></output></td>
+              <td><output id="antsNb"></output></td>
+              <td><output id="antsStep">0</output></td>
+              <td><output id="antState">STOPPED</output></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="oneOption notFirstOption">
+
+          <h3 onclick="changeOpenCloseOneOption(4)">Simulation Options</h3>
+          <div onclick="changeOpenCloseOneOption(4)" class="openCloseOneOption" id="arrow_simulationOptions">
+            &#8897;
+          </div>
+
+          <div class="content_options" id="content_simulationOptions">
+
+            <h4 style="margin-top: 0px;">Step per tick :</h4>
+            <p>Respect this : More Ant &rarr; less step per tick !</p>
+
+            <input type="number" onchange="changeStepPerTick()" id="stepPerTick" name="" value="1">
+
+            <br><br>
+
+            <h4 style="margin-top: 0px;">Step :</h4>
+            <p>Could take a moment to process, depends on the value...</p>
+
+            <input type="number" id="step" name="" value="1000">
+            <input onclick="changeStep()" type="button" name="" value="+">
+
+          </div>
+
+        </div>
+
+        <div class="oneOption notFirstOption">
+          <h3 onclick="changeOpenCloseOneOption(1)">Mouse on Canvas</h3>
+          <div onclick="changeOpenCloseOneOption(1)" class="openCloseOneOption" id="arrow_mouseOnCanvas">
+            &#8897;
+          </div>
+
+          <div class="content_options" id="content_mouseOnCanvas">
+
+            <h4 style="display: inline-block; margin-top: 0px;">Mode :</h4>
+
+            <label for="pressing">
+              <input onclick="changeMouseMode(1)" id="pressing" type="radio" name="mouseMode" value="pressing"> Pressing
+            </label>
+
+            <label for="clicking">
+              <input onclick="changeMouseMode(2)" id="clicking" type="radio" name="mouseMode" value="clicking" checked> Clicking
+            </label>
+
+            <br>
+
+            <h4 style="display: inline-block; margin-top: 0px;">Action :</h4>
+
+            <label for="drawing">
+              <input onclick="changeCanvasMouseAction(1)" id="drawing" type="radio" name="clickMode" value="drawing"> Drawing
+            </label>
+
+            <label for="antsSpawning">
+              <input onclick="changeCanvasMouseAction(2)" id="antsSpawning" type="radio" name="clickMode" value="antsSpawning" checked> Ant Spawning
+            </label>
+
+          </div>
+
+        </div>
+
+        <div class="oneOption notFirstOption">
+          <h3 onclick="changeOpenCloseOneOption(2)">Ant</h3>
+          <div onclick="changeOpenCloseOneOption(2)" class="openCloseOneOption" id="arrow_ant">
+            &#8897;
+          </div>
+
+          <div class="content_options" id="content_ant">
+
+            <h4 style="display: inline-block; margin-top: 0px;">Type :</h4>
+
+            <label for="classicAnt">
+              <input onclick="changeAntType(1)" id="classicAnt" type="radio" name="antType" value="classicAnt" checked> Classic
+            </label>
+
+            <label for="warriorAnt">
+              <input onclick="changeAntType(2)" id="warriorAnt" type="radio" name="antType" value="warriorAnt"> Warrior
+            </label>
+
+            <label for="randomAnt">
+              <input onclick="changeAntType(3)" id="randomAnt" type="radio" name="antType" value="randomAnt"> Random
+            </label>
+
+            <label for="customAnt">
+              <input onclick="changeAntType(4)" id="customAnt" type="radio" name="antType" value="customAnt"> Custom
+            </label>
+
+            <br>
+
+            <div id="content_customAnt">
+              <h4 style="display: inline-block; margin-top: 0px;">Create custom Ant : (Select radio button "Custom" to use this)</h4>
+
+              <div id="content_customAnt_second">
+                <input type="button" onclick="addOneCustomAntStep()" value="Add one more step">
+                <input onclick="deleteCustomAntStep()" type="button" name="" value="Delete last step">
+
+                <br><br>
+
+                <div id="customAntSteps">
+
+                  <div id="customAntTurnBox1">
+                    <label>1.</label>
+
+                    <label for='customAntTurnLeft1' class='borderCustomAnt'>
+                      <input id='customAntTurnLeft1' type='radio' name='customAntTurn1' value='customAntTurnLeft1'> &larr;
+                    </label>
+
+                    <label for='customAntTurnRight1' class='borderCustomAnt'>
+                      <input id='customAntTurnRight1' type='radio' name='customAntTurn1' value='customAntTurnRight1' checked> &rarr;
+                    </label>
+
+                    <input id="customAntColor1" type='color' name='color' value='#0000ff'>
+
+                    <br>
+
+                    <label>2.</label>
+
+                    <label for='customAntTurnLeft2' class='borderCustomAnt'>
+                      <input id='customAntTurnLeft2' type='radio' name='customAntTurn2' value='customAntTurnLeft2' checked> &larr;
+                    </label>
+
+                    <label for='customAntTurnRight2' class='borderCustomAnt'>
+                      <input id='customAntTurnRight2' type='radio' name='customAntTurn2' value='customAntTurnRight2'> &rarr;
+                    </label>
+
+                    <input id="customAntColor2" type='color' name='color' value='#ff0000'>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <br>
+
+            <h4 style="display: inline-block; margin-top: 0px;">Orientation :</h4>
+
+            <label for="randomOrientation">
+              <input onclick="changeAntOrientation(0)" id="randomOrientation" type="radio" name="antOrientation" value="randomOrientation" checked> Random
+            </label>
+
+            <label for="upOrientation">
+              <input onclick="changeAntOrientation(1)" id="upOrientation" type="radio" name="antOrientation" value="upOrientation"> Up
+            </label>
+
+            <label for="downOrientation">
+              <input onclick="changeAntOrientation(2)" id="downOrientation" type="radio" name="antOrientation" value="downOrientation"> Down
+            </label>
+
+            <label for="rightOrientation">
+              <input onclick="changeAntOrientation(3)" id="rightOrientation" type="radio" name="antOrientation" value="rightOrientation"> Right
+            </label>
+
+            <label for="leftOrientation">
+              <input onclick="changeAntOrientation(4)" id="leftOrientation" type="radio" name="antOrientation" value="leftOrientation"> Left
+            </label>
+
+            <br>
+
+            <h4 style="margin-top: 0px;">Life time :</h4>
+
+            <label for="infiniteLifeTime">
+              <input onclick="enableInfiniteLifeTime()" id="infiniteLifeTime" type="checkbox" value="infiniteLifeTime"> Enable infinite time
+            </label>
+
+            <p>Current value : <output id="lifeTime"></output></p>
+            <input id="lifeTimeSlider" oninput="changeLifeTime()" type="range" min="1" max="20000" value="1000" class="slider">
+
+            <br>
+
+            <h4>Random spawn :</h4>
+
+            <input id="addAnt" type="number" name="" value="100">
+            <button class="button" onclick="addAntRandomPos()">Add new ant with random position</button>
+          </div>
+        </div>
+
+        <div class="oneOption notFirstOption">
+          <h3 onclick="changeOpenCloseOneOption(3)">Map</h3>
+          <div onclick="changeOpenCloseOneOption(3)" class="openCloseOneOption" id="arrow_map">
+            &#8897;
+          </div>
+
+          <div class="content_options" id="content_map">
+
+            <h4 style="margin-top: 0px;">Size :</h4>
+
+            <p><strong>WARNING !</strong> Changing the size will reset the simulation</p>
+
+            <p>Current size : X : <output id="mapSizeX"></output> | Y : <output id="mapSizeY"></output></p>
+
+            <input type="number" id="changeMapSizeX" name="" value="1000">
+            <input type="number" id="changeMapSizeY" name="" value="1000">
+
+            <input type="button" onclick="changeMapSize()" name="" value="Validate">
+
+            <br><br>
+
+            <h4 style="margin-top: 0px;">Zoom :</h4>
+
+            <p>Current value : <output id="rectNumber"></output></p>
+
+            <input id="zoomSlider" oninput="changeZoom()" type="range" min="1" max="500" value="250" class="slider">
+          </div>
+        </div>
+
+      </div>
+      <div class="canvas">
+
+        <div>
+          <p>
+            X : <input id="simulationPosX" type="number" name="" value="">
+            Y : <input id="simulationPosY" type="number" name="" value="">
+            <input type="button" onclick="changeSimulationPos()" name="" value="Move to">
+          </p>
+        </div>
+
+        <canvas id="myCanvas" width="500" height="500" style="border:3px solid #000000;"></canvas>
+
+        <div>
+
+          <div class="canvasUtils">
+            <p>Moving step :</p>
+            <input id="moveSimulationStep" style="width: 100%;" type="number" name="" value="250">
+          </div>
+
+          <div class="canvasUtils" style="text-align: right;">
+            <input class="arrow" type="button" onclick="moveSimulation('l')" name="" value="&larr;">
+          </div>
+
+          <div class="canvasUtils">
+            <div style="width: 100%;">
+              <input class="arrow" type="button" onclick="moveSimulation('u')" name="" value="&uarr;">
+            </div>
+
+            <div style="width: 100%;">
+              <input class="arrow" type="button" onclick="moveSimulation('d')" name="" value="&darr;">
+            </div>
+          </div>
+
+          <div class="canvasUtils" style="text-align: left;">
+            <input class="arrow" type="button" onclick="moveSimulation('r')" name="" value="&rarr;">
+          </div>
+
+        </div>
+      </div>
+
+      <br><br>
+
+      <div>
+        Created and developped by Alexander Wohlfahrt - 03.07.2018 - Individual Algo. Num Project - HE-Arc
+      </div>
+    </div>
+  </body>
+</html>
