@@ -1,12 +1,73 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Spicy Paper</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <title>Spicy Paper</title>
 </head>
 <body>
-    <h1>Spicy Paper</h1>
-    <h2>Demo Projects</h2>
-    <a href="./fourmis">Fourmis project - Algo Num - HE-Arc - 2018</a>
+    <div include-html="templates/navbar.html"></div>
+
+    <main class="container my-3">
+
+        <h2 class="my-5 text-center text-danger"><strong>!!! The site is in developpement !!!</strong></h2>
+
+        <div class="row">
+            <div class="offset-3 col-6">
+                <img src="./static/images/dancing_cube_logo_16_sur_9.png" alt="Dancing Cube" class="img-fluid">
+                <h2>Dancing Cube</h2>
+                <p>
+                    Project done with Unity and C# in three weeks. Under developpement in Bachelor at HE-Arc.
+                    <a href="./templates/projects/dancing_cube.html">More...</a>
+                </p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <img src="./static/images/textured_sun.png" alt="Textured Sun" class="img-fluid">
+                <h2>Textured Sun</h2>
+                <p>
+                    Project done with WebGL in one month.
+                    <a href="./templates/projects/textured_sun.html">More...</a>
+                </p>
+            </div>
+            <div class="col-12 col-md-4">
+                <img src="./static/images/animated_3d_star.png" alt="Animated 3D Star" class="img-fluid">
+                <h2>Animated 3D Star</h2>
+                <p>
+                    Project done with WebGL in one month.
+                    <a href="./templates/projects/textured_sun.html">More...</a>
+                </p>
+            </div>
+            <div class="col-12 col-md-4">
+                <img src="./static/images/langton_ant.png" alt="Langton's Ant" class="img-fluid">
+                <h2>Textured Sun</h2>
+                <p>
+                    Project done with WebGL in one month.
+                    <a href="./templates/projects/langton_ant.html">More...</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <a href="./templates/projects.html">Show more projects...</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./static/js/tools.js"></script>
+    <script>
+        includeHTML();
+    </script>
 </body>
 </html>

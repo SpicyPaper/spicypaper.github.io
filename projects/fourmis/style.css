@@ -1,0 +1,170 @@
+h3 {
+  font-size: 24px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  color: black;
+  cursor: pointer;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+  border-bottom: 1px solid #dddddd;
+}
+
+td, th {
+    text-align: center;
+    padding: 8px;
+}
+
+.borderCustomAnt {
+  padding-right: 5%;
+}
+
+#content_customAnt_second {
+  display: none;
+}
+
+.content_options {
+  display: inline-block;
+  width: 100%;
+}
+
+#content_customAnt {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.wrapper {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+}
+
+.canvas {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  background-color: white;
+  width: 56%;
+  padding: 1%;
+	border: 3px solid darkblue;
+}
+
+#options {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  width: 33%;
+  background-color: white;
+  padding: 1%;
+  margin-right: 1%;
+	border: 3px solid darkblue;
+}
+
+.canvasUtils {
+  width: 15%;
+  display: inline-block;
+}
+
+.arrow {
+  font-size: 25px;
+  padding: 5px;
+}
+
+#closeOptions {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 25px;
+}
+
+#openOptions {
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 5px;
+  font-size: 25px;
+}
+
+.openCloseOneOption {
+  position: absolute;
+  right: 20px;
+  top: 5px;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.notFirstOption {
+  position: relative;
+  border-top: 3px solid darkblue;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.oneOption {
+  width: 100%;
+}
+
+.button {
+  height: 30px;
+  margin-top: 5px;
+}
+
+.buttonManager {
+  width: 18%;
+}
+
+@media screen and (max-width: 1000px) {
+  .canvas {
+    width: 89%;
+  }
+
+  #options {
+    width: 89%;
+    margin: 3%;
+    text-align: center;
+  }
+}
+
+/*SOURCE : https://www.w3schools.com/howto/howto_js_rangeslider.asp*/
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    margin: 0px;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
